@@ -5,12 +5,14 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.buttonText,
+    this.onTap,
   });
   final String buttonText;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 50,
         width: double.infinity,

@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const CustomTextField(
+            CustomTextField(
               icon: Icons.email,
               hintText: 'Enter your Email',
               label: 'Email',
@@ -51,7 +51,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustomTextField(
+            CustomTextField(
               icon: Icons.password,
               hintText: 'Enter your Password',
               label: 'Password',
