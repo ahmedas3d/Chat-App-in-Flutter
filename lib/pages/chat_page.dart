@@ -3,6 +3,7 @@ import 'package:chat_app/models/message.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class ChatPage extends StatelessWidget {
   ChatPage({super.key});
@@ -16,8 +17,9 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy(KTime).snapshots(),
+      stream: messages.orderBy(KTime, descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -44,6 +46,13 @@ class ChatPage extends StatelessWidget {
                     'Chat',
                     style: TextStyle(fontFamily: 'Pacifico', fontSize: 24),
                   ),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(LucideIcons.logOut),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ],
               ),
               centerTitle: true,
@@ -52,12 +61,17 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    reverse: true,
                     controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
-                      return ChatBubble(
-                        message: messagesList[index],
-                      );
+                      return messagesList[index].id == email
+                          ? ChatBubble(
+                              message: messagesList[index],
+                            )
+                          : ChatBubbleForFriend(
+                              message: messagesList[index],
+                            );
                     },
                   ),
                 ),
@@ -70,12 +84,13 @@ class ChatPage extends StatelessWidget {
                         {
                           KMessage: data,
                           KTime: DateTime.now(),
+                          KId: email,
                         },
                       );
                       controller.clear();
                       _controller.animateTo(
-                        _controller.position.maxScrollExtent,
-                        duration: const Duration(milliseconds: 300),
+                        0,
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.easeIn,
                       );
                     },

@@ -38,6 +38,8 @@ dependencies:
   firebase_auth: ^5.3.1
   modal_progress_hud_nsn: ^0.5.1
   cloud_firestore: ^5.4.4
+  lucide_icons_flutter: ^1.2.3
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
@@ -82,3 +84,10 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/message_icon.jpeg"
+  adaptive_icon_background: "assets/images/message_icon.jpeg"
+  adaptive_icon_foreground: "assets/images/message_icon.jpeg"

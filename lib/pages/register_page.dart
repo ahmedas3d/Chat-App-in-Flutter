@@ -101,7 +101,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       setState(() {});
                       try {
                         await registerUser();
-                        Navigator.pushNamed(context, 'HomePage');
+                        Navigator.pushNamed(context, 'HomePage',
+                            arguments: email);
                         showSnackBar(context, 'Email Scssfully Registered',
                             Colors.green);
                       } on FirebaseAuthException catch (e) {

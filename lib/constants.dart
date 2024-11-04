@@ -5,3 +5,4 @@ const kLogo = 'assets/images/scholar.png';
 const KMessagesCollections = 'messages';
 const KMessage = 'message';
 const KTime = 'time';
+const KId = 'id';

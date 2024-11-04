@@ -76,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 CustomTextField(
+                  obscureText: true,
                   onChange: (data) {
                     password = data;
                   },
@@ -93,7 +94,8 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {});
                       try {
                         await LoginUser();
-                        Navigator.pushNamed(context, 'HomePage');
+                        Navigator.pushNamed(context, 'HomePage',
+                            arguments: email);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           showSnackBar(context, 'No user found for that email.',
@@ -129,7 +131,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, 'RegisterPage');
+                        Navigator.pushNamed(
+                          context,
+                          'RegisterPage',
+                        );
                       },
                       child: const Text(
                         ' Sign Up',

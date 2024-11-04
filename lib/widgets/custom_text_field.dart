@@ -7,15 +7,18 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.label,
     this.onChange,
+    this.obscureText = false,
   });
   final IconData icon;
   final String hintText;
   final String label;
+  bool? obscureText;
   Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText!,
       validator: (data) {
         if (data == null || data.isEmpty) {
           return 'Please enter some $label';
